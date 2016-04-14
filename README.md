@@ -1,5 +1,7 @@
 # CONFIDANT
 
+[![Join the chat at https://gitter.im/eleanorreem/webrtc](https://badges.gitter.im/eleanorreem/webrtc.svg)](https://gitter.im/eleanorreem/webrtc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## What
 A secure platform for connecting volunteer mentors and mentees using IPCortex's WebRTC API.
 
