@@ -1,5 +1,4 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
 
 class MentorItem extends React.Component {
   constructor () {
@@ -58,9 +57,19 @@ class MentorItem extends React.Component {
   }
   render () {
     return (
-      <li style={this.props.style}>{this.props.mentor.username}
-        <Button bsStyle='success' style={{float: 'right'}} onClick={this.onClickFunc}>CALL</Button>
-      </li>
+      <div className='profile-bar'>
+        <div className='profile-image'>
+          <img src={this.props.imgUrl}/>
+        </div>
+        <p className='mentor-title'>{this.props.username}</p>
+        <img
+          src='https://files.gitter.im/andrewMacmurray/2W0u/phone.png'
+          className='call availble'
+          onClick={this.onClickFunc}
+        />
+        <div className={'online-status ' + this.props.mentorStatus} >
+        </div>
+      </div>
     )
   }
 }

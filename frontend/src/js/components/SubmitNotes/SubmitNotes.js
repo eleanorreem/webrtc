@@ -16,6 +16,9 @@ class Notes extends React.Component {
     this.submitNotes = this.submitNotes.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
   }
+  componentDidMount () {
+    this.setState({showModal: this.props.modalStatus})
+  }
   toggleModal () {
     this.setState({showModal: !this.state.showModal})
   }
@@ -67,7 +70,7 @@ class Notes extends React.Component {
             </Button>
           </form>
         </Modal>
-        <Button onClick={this.toggleModal}>Create a note</Button>
+        <Button onClick={this.toggleModal}>{this.props.buttonText}</Button>
       </div>
     )
   }
@@ -78,7 +81,9 @@ Notes.defaultProps = {
   noteInstructions: 'please let me know how you felt about this session, so I can improve',
   note: 'Reem smells',
   menteeName: 'ellie',
-  mentorName: 'sublimeOwen'
+  mentorName: 'sublimeOwen',
+  modalStatus: false,
+  buttonText: 'create a note'
 }
 
 export default Notes
