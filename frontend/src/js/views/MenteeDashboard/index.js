@@ -14,11 +14,10 @@ export default class MenteeDashboard extends React.Component {
       showViewModal: false,
       showEditModal: false,
       showFeedbackModal: false,
-      showPreChatModal: true
+      showPreChatModal: false
     }
     this.changeStatus = this.changeStatus.bind(this)
   }
-  // toggle modal state (modal)
 
   changeStatus (newStatus) {
     this.setState({
@@ -48,6 +47,8 @@ export default class MenteeDashboard extends React.Component {
               changeStatus={this.changeStatus}
               viewProfileLink={this.toggleModal.bind(this, 'showViewModal')}
               editProfileLink={this.toggleModal.bind(this, 'showEditModal')}
+              preChatModal={this.toggleModal.bind(this, 'showPreChatModal')}
+              feedbackModal={this.toggleModal.bind(this, 'showFeedbackModal')}
             />
           </Col>
           <Col xs={2}/>
@@ -78,26 +79,29 @@ export default class MenteeDashboard extends React.Component {
         </Modal>
         <Modal
           show={this.state.showFeedbackModal}
-          onHide={this.toggleModal}
+          onHide={this.toggleModal.bind(this, 'showFeedbackModal')}
         >
           <Modal.Header closeButton>
           </Modal.Header>
           <SubmitNotes
             modalType='showFeedbackModal'
-            toggleModal={this.toggleModal.bind(this)}
+            toggleModal={this.toggleModal.bind(this, 'showFeedbackModal')}
             noteInstructions='please leave feedback on your session'
           />
         </Modal>
         <Modal
           show={this.state.showPreChatModal}
-          onHide={this.toggleModal}
+          onHide={this.toggleModal.bind(this, 'showPreChatModal')}
         >
           <Modal.Header closeButton>
           </Modal.Header>
-          <SubmitNotes modalType='showPreChatModal' toggleModal={this.toggleModal.bind(this)}
-            noteInstructions={'Let your mentor know how you are feeling today'}
+          <SubmitNotes
+            modalType='showPreChatModal'
+            toggleModal={this.toggleModal.bind(this, 'showPreChatModal')}
+            noteInstructions='Let your mentor know how you feel'
           />
         </Modal>
+        <div className='bottomdiv'></div>
       </Grid>
     )
   }

@@ -6,6 +6,8 @@ export default (props) => {
     <ButtonGroup vertical block>
       <Button onClick={props.viewProfileLink} block>View Profile</Button>
       <Button onClick={props.editProfileLink} block>Edit Profile</Button>
+      <Button onClick={props.feedbackModal} block>Leave Some Feedback</Button>
+      <Button onClick={props.preChatModal} block>Tell us how you feel</Button>
       <DropdownButton
         bsStyle={props.status === 'Online' ? 'success' : 'danger'}
         title={props.status}

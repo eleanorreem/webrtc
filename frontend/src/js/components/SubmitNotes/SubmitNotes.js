@@ -25,6 +25,7 @@ class SubmitNotes extends React.Component {
   }
   submitNotes (e) {
     e.preventDefault()
+    this.props.toggleModal()
     const options = {
       note: this.state.note,
       date: this.state.date,
@@ -52,7 +53,6 @@ class SubmitNotes extends React.Component {
             required
           />
           <Button
-            onClick={this.props.toggleModal.bind(this, this.props.modalType)}
             type='submit'
           >
             Submit

@@ -20,6 +20,8 @@ const styles = {
     backgroundColor: '#3F51B5',
     padding: '2em',
     borderRadius: '10px'
+  },
+  Grid: {
   }
 }
 
@@ -140,7 +142,7 @@ class MentorList extends React.Component {
           console.log('rejecting call')
           av.reject()
           this.updateState({showModal: false})
-          this.props.toggleModal.bind(this, 'showFeedbackModal')
+          this.props.toggleModal('showFeedbackModal')
         })
         accept.addEventListener('click', () => {
           console.log('accepting call')
@@ -293,12 +295,13 @@ class MentorList extends React.Component {
 
   render () {
     if (this.props.location === '/mentor-dashboard') {
-      styles.ul.display = 'none'
+      console.log('checkingggg')
+      styles.Grid.display = 'none'
     }
     return (
       <div>
-        <div>
-          <Grid className='mentor-list'>
+        <div className={(this.props.location === '/mentor-dashboard' ? 'hidden-item' : '')}>
+          <Grid className={'mentor-list'}>
             <Row className='mentor-list-navbar'>
               <Col xs={1}/>
               <Col xs={3}>
@@ -322,7 +325,6 @@ class MentorList extends React.Component {
                   <Col xs={1}/>
                   <Col xs={10}>
                     <MentorItem
-                      toggleModal={this.props.toggleModal}
                       imgUrl={mentor.imgUrl}
                       style={styles.li}
                       username={mentor.username}
@@ -340,7 +342,6 @@ class MentorList extends React.Component {
                   <Col xs={1}/>
                   <Col xs={10}>
                     <MentorItem
-                      toggleModal={this.props.toggleModal}
                       imgUrl={mentor.imgUrl}
                       style={styles.li}
                       username={mentor.username}
