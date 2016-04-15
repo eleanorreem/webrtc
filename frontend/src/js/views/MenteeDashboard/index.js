@@ -14,10 +14,11 @@ export default class MenteeDashboard extends React.Component {
       showViewModal: false,
       showEditModal: false,
       showFeedbackModal: false,
-      showFeelingsModal: false
+      showPreChatModal: true
     }
     this.changeStatus = this.changeStatus.bind(this)
   }
+  // toggle modal state (modal)
 
   changeStatus (newStatus) {
     this.setState({
@@ -36,12 +37,12 @@ export default class MenteeDashboard extends React.Component {
       <Grid>
         <Row>
           <Col xs={1}/>
-          <Col xs={10}><MentorList toggleModal={this.toggleModal} {...this.props}/></Col>
+          <Col xs={10}><MentorList toggleModal={this.toggleModal.bind(this)} {...this.props}/></Col>
           <Col md={1}/>
         </Row>
         <Row>
-          <Col xs='2'/>
-          <Col xs='8'>
+          <Col xs={2}/>
+          <Col xs={8}>
             <ProfileButtons
               status={this.state.status}
               changeStatus={this.changeStatus}
@@ -49,7 +50,7 @@ export default class MenteeDashboard extends React.Component {
               editProfileLink={this.toggleModal.bind(this, 'showEditModal')}
             />
           </Col>
-          <Col xs='2'/>
+          <Col xs={2}/>
         </Row>
         <Modal
           show={this.state.showViewModal}
@@ -75,8 +76,28 @@ export default class MenteeDashboard extends React.Component {
             <Button onClick={this.toggleModal.bind(this, 'showEditModal')}>Close</Button>
           </Modal.Footer>
         </Modal>
-        <SubmitNotes buttonText={'please leave feedback'}/>
-        <SubmitNotes buttonText={'tell us how you feel'}/>
+        <Modal
+          show={this.state.showFeedbackModal}
+          onHide={this.toggleModal}
+        >
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <SubmitNotes
+            modalType='showFeedbackModal'
+            toggleModal={this.toggleModal.bind(this)}
+            noteInstructions='please leave feedback on your session'
+          />
+        </Modal>
+        <Modal
+          show={this.state.showPreChatModal}
+          onHide={this.toggleModal}
+        >
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <SubmitNotes modalType='showPreChatModal' toggleModal={this.toggleModal.bind(this)}
+            noteInstructions={'Let your mentor know how you are feeling today'}
+          />
+        </Modal>
       </Grid>
     )
   }

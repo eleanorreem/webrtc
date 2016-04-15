@@ -140,8 +140,7 @@ class MentorList extends React.Component {
           console.log('rejecting call')
           av.reject()
           this.updateState({showModal: false})
-          this.props.toggleModal('showFeedbackModal')
-          //THIS IS WHERE YOU OPEN THE FEEDBACK MODAL. I THINK!
+          this.props.toggleModal.bind(this, 'showFeedbackModal')
         })
         accept.addEventListener('click', () => {
           console.log('accepting call')
@@ -180,6 +179,7 @@ class MentorList extends React.Component {
         hangup.addEventListener('click', () => {
           console.log('hanging up')
           av.reject()
+          //THIS IS WHERE YOU OPEN THE FEEDBACK MODAL. I THINK!
         })
         /* Create a new video tag to play/display the remote media */
         console.log(video, '<< video\n', av.remoteMedia[id], '<< av remote')
@@ -322,6 +322,7 @@ class MentorList extends React.Component {
                   <Col xs={1}/>
                   <Col xs={10}>
                     <MentorItem
+                      toggleModal={this.props.toggleModal}
                       imgUrl={mentor.imgUrl}
                       style={styles.li}
                       username={mentor.username}
@@ -339,6 +340,7 @@ class MentorList extends React.Component {
                   <Col xs={1}/>
                   <Col xs={10}>
                     <MentorItem
+                      toggleModal={this.props.toggleModal}
                       imgUrl={mentor.imgUrl}
                       style={styles.li}
                       username={mentor.username}
