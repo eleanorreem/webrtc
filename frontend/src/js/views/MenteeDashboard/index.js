@@ -4,6 +4,7 @@ import ProfileButtons from '../MentorDashboard/ProfileButtons.js'
 import MenteesProfilePage from '../../components/Profile/MenteesProfilePage.js'
 import MenteesEditProfile from '../../components/MenteesSignup/MenteesEditProfile.js'
 import MentorList from '../../components/MentorList/index.js'
+import SubmitNotes from '../../components/SubmitNotes/SubmitNotes.js'
 
 export default class MenteeDashboard extends React.Component {
   constructor () {
@@ -11,7 +12,9 @@ export default class MenteeDashboard extends React.Component {
     this.state = {
       status: 'Online',
       showViewModal: false,
-      showEditModal: false
+      showEditModal: false,
+      showFeedbackModal: false,
+      showPreChatModal: false
     }
     this.changeStatus = this.changeStatus.bind(this)
   }
@@ -32,20 +35,23 @@ export default class MenteeDashboard extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col md={8}>
-            <h2>Mentors</h2>
-          </Col>
+          <Col xs={1}/>
+          <Col xs={10}><MentorList toggleModal={this.toggleModal.bind(this)} {...this.props}/></Col>
+          <Col md={1}/>
         </Row>
         <Row>
-          <Col md={8}><MentorList /></Col>
-          <Col md={4}>
+          <Col xs={2}/>
+          <Col xs={8}>
             <ProfileButtons
               status={this.state.status}
               changeStatus={this.changeStatus}
               viewProfileLink={this.toggleModal.bind(this, 'showViewModal')}
               editProfileLink={this.toggleModal.bind(this, 'showEditModal')}
+              preChatModal={this.toggleModal.bind(this, 'showPreChatModal')}
+              feedbackModal={this.toggleModal.bind(this, 'showFeedbackModal')}
             />
           </Col>
+          <Col xs={2}/>
         </Row>
         <Modal
           show={this.state.showViewModal}
@@ -71,6 +77,31 @@ export default class MenteeDashboard extends React.Component {
             <Button onClick={this.toggleModal.bind(this, 'showEditModal')}>Close</Button>
           </Modal.Footer>
         </Modal>
+        <Modal
+          show={this.state.showFeedbackModal}
+          onHide={this.toggleModal.bind(this, 'showFeedbackModal')}
+        >
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <SubmitNotes
+            modalType='showFeedbackModal'
+            toggleModal={this.toggleModal.bind(this, 'showFeedbackModal')}
+            noteInstructions='please leave feedback on your session'
+          />
+        </Modal>
+        <Modal
+          show={this.state.showPreChatModal}
+          onHide={this.toggleModal.bind(this, 'showPreChatModal')}
+        >
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <SubmitNotes
+            modalType='showPreChatModal'
+            toggleModal={this.toggleModal.bind(this, 'showPreChatModal')}
+            noteInstructions='Let your mentor know how you feel'
+          />
+        </Modal>
+        <div className='bottomdiv'></div>
       </Grid>
     )
   }
@@ -78,7 +109,19 @@ export default class MenteeDashboard extends React.Component {
 
 MenteeDashboard.defaultProps = {
   status: 'Offline',
-  mentors: [{mentorName: 'Andrew'}, {mentorName: 'Sam'}, {mentorName: 'Ellie'}],
+  mentors: [{
+    mentorName: 'andrew',
+    imgUrl: 'https://avatars0.githubusercontent.com/u/14013616?v=3&s=400',
+    mentorStatus: 'online'
+  }, {
+    mentorName: 'sam',
+    imgUrl: 'https://avatars0.githubusercontent.com/u/15983736?v=3&s=400',
+    mentorStatus: 'busy'
+  }, {
+    mentorName: 'ellie',
+    imgUrl: 'https://avatars2.githubusercontent.com/u/16049515?v=3&s=460',
+    mentorStatus: 'offline'
+  }],
   editProfile: {
     username: 'Ivan',
     firstname: 'Ivan',
@@ -88,7 +131,7 @@ MenteeDashboard.defaultProps = {
     profession: 'King of Puns',
     topics: ['Ivan', 'Ivan greatness', 'my glossy soft head of hair'],
     aboutme: 'I am da Bomb'
-  }
+  },
 }
 
 MenteeDashboard.propTypes = {

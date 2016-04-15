@@ -34,7 +34,7 @@ export default class MentorDashboard extends React.Component {
       <Grid>
         <Row>
           <Col md={8}>
-            <h2>Conversations with Mentees</h2>
+            <h2>Your Mentees</h2>
           </Col>
         </Row>
         <Row>
@@ -48,6 +48,7 @@ export default class MentorDashboard extends React.Component {
           </Col>
           <Col md={4}>
             <ProfileButtons
+              location={this.props.location.pathname}
               status={this.state.status}
               changeStatus={this.changeStatus}
               viewProfileLink={this.toggleModal.bind(this, 'showViewModal')}
@@ -79,6 +80,7 @@ export default class MentorDashboard extends React.Component {
             <Button onClick={this.toggleModal.bind(this, 'showEditModal')}>Close</Button>
           </Modal.Footer>
         </Modal>
+        <div className='bottomdiv'></div>
       </Grid>
     )
   }
@@ -90,7 +92,7 @@ MentorDashboard.defaultProps = {
     {menteeName: 'Sam Houston',
       conversationLink: '/contact',
       feedbackNotes: [{
-        note: 'I feel great right now',
+        note: 'I feel sad right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
@@ -100,34 +102,34 @@ MentorDashboard.defaultProps = {
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }, {
-        note: 'I feel great right now',
+        note: 'I feel okay right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }],
       prechatNotes: [{
-        note: 'I feel great right now',
+        note: 'I feel bored right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }, {
-        note: 'I feel great right now',
+        note: 'I feel tired right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }, {
-        note: 'I feel great right now',
+        note: 'I feel real right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }],
       postchatNotes: [{
-        note: 'I feel great right now',
+        note: 'I feel mournful right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'
       }, {
-        note: 'I feel great right now',
+        note: 'I feel sublime right now',
         mentorName: 'Andrew',
         menteeName: 'sublimeOwen',
         date: 'somestring'

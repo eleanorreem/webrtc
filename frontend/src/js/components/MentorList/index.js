@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal} from 'react-bootstrap'
+import {Modal, Grid, Row, Col} from 'react-bootstrap'
 import MentorItem from './MentorItem/index.js'
 import Videochat from './../Videochat/index.js'
 
@@ -20,6 +20,8 @@ const styles = {
     backgroundColor: '#3F51B5',
     padding: '2em',
     borderRadius: '10px'
+  },
+  Grid: {
   }
 }
 
@@ -140,6 +142,7 @@ class MentorList extends React.Component {
           console.log('rejecting call')
           av.reject()
           this.updateState({showModal: false})
+          this.props.toggleModal('showFeedbackModal')
         })
         accept.addEventListener('click', () => {
           console.log('accepting call')
@@ -178,6 +181,7 @@ class MentorList extends React.Component {
         hangup.addEventListener('click', () => {
           console.log('hanging up')
           av.reject()
+          //THIS IS WHERE YOU OPEN THE FEEDBACK MODAL. I THINK!
         })
         /* Create a new video tag to play/display the remote media */
         console.log(video, '<< video\n', av.remoteMedia[id], '<< av remote')
@@ -198,6 +202,7 @@ class MentorList extends React.Component {
     const mentors = [{
       username: 'Jacket',
       apiId: 'fac28a',
+      imgUrl: 'https://avatars2.githubusercontent.com/u/16049515?v=3&s=460',
       age: 22,
       firstName: 'mentor 1',
       lastName: 'string',
@@ -213,6 +218,7 @@ class MentorList extends React.Component {
       lastName: 'string',
       gender: 'male',
       profession: 'string',
+      imgUrl: 'https://avatars2.githubusercontent.com/u/16049515?v=3&s=460',
       topics: ['strings'],
       aboutme: 'string'
     }, {
@@ -222,13 +228,15 @@ class MentorList extends React.Component {
       firstName: 'mentor 3',
       lastName: 'string',
       gender: 'male',
+      imgUrl: 'https://avatars0.githubusercontent.com/u/15983736?v=3&s=400',
       profession: 'string',
       topics: ['strings'],
       aboutme: 'string'
     }, {
-      username: 'Andrew',
+      username: 'andrew',
       apiId: 'fac21b',
       age: 22,
+      imgUrl: 'https://avatars0.githubusercontent.com/u/14013616?v=3&s=400',
       firstName: 'mentor 3',
       lastName: 'string',
       gender: 'male',
@@ -287,23 +295,69 @@ class MentorList extends React.Component {
 
   render () {
     if (this.props.location === '/mentor-dashboard') {
-      styles.ul.display = 'none'
+      console.log('checkingggg')
+      styles.Grid.display = 'none'
     }
     return (
       <div>
-        <ul style={styles.ul}>
-          {this.state.mentorList.map((mentor, i) => {
-            return mentor.canChat
-            ? <MentorItem
-              style={styles.li}
-              mentor={mentor}
-              key={i}
-              changeState={this.updateState}
-              processFeed={this.processFeed}
-              />
-            : null
-          })}
-        </ul>
+        <div className={(this.props.location === '/mentor-dashboard' ? 'hidden-item' : '')}>
+          <Grid className={'mentor-list'}>
+            <Row className='mentor-list-navbar'>
+              <Col xs={1}/>
+              <Col xs={3}>
+                <p className='navbar-items'> previous mentors </p>
+              </Col>
+              <Col xs={3}>
+                <p className='navbar-items'> suggested mentors </p>
+              </Col>
+              <Col xs={4}/>
+              <Col xs={1}>
+                <img
+                  src='https://files.gitter.im/andrewMacmurray/cBwm/search.png'
+                  className='search-icon'
+                />
+              </Col>
+            </Row>
+            {this.state.mentorList.map((mentor, i) => {
+              return mentor.canChat
+              ?
+                <Row>
+                  <Col xs={1}/>
+                  <Col xs={10}>
+                    <MentorItem
+                      imgUrl={mentor.imgUrl}
+                      style={styles.li}
+                      username={mentor.username}
+                      mentor={mentor}
+                      key={i}
+                      changeState={this.updateState}
+                      processFeed={this.processFeed}
+                      mentorStatus={'online'}
+                    />
+                  </Col>
+                  <Col xs={1}/>
+                </Row>
+                    :
+                <Row>
+                  <Col xs={1}/>
+                  <Col xs={10}>
+                    <MentorItem
+                      imgUrl={mentor.imgUrl}
+                      style={styles.li}
+                      username={mentor.username}
+                      mentor={mentor}
+                      key={i}
+                      changeState={this.updateState}
+                      processFeed={this.processFeed}
+                      mentorStatus={'offline'}
+                    />
+                  </Col>
+                  <Col xs={1}/>
+                </Row>
+            })
+          }
+          </Grid>
+        </div>
         <Modal bsSize='large'
           show={this.state.showModal}
           onHide={this.updateState.bind(this, {showModal: false})}

@@ -61,6 +61,99 @@ ul {
   border-top: none;
 }
 
+.mentor-list-navbar {
+  background-color: #e4e4e4;
+  height: 58px;
+  margin-bottom: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.profile-image {
+  height: 50px;
+  width: 50px;
+  float: left;
+    img {
+      width: 100%;
+      border-radius: 36px;
+    }
+}
+
+.mentor-list {
+  border-radius: 5px;
+  margin-top: 57px;
+  background-color: #EFEFEF;
+  max-width: 900px;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+}
+
+.navbar-items {
+  font-size: 18px;
+  margin-top: 18px;
+}
+.profile-bar {
+  background-color: #5bacff;
+  margin-top: 38px;
+  border-radius: 7px;
+  height: 77px;
+  padding: 14px;
+  p {
+    font-size: 20px;
+    float: left;
+    margin-top: 10px;
+    color: white;
+    margin-left: 31px;
+  }
+}
+
+.call {
+  height: 50px;
+  float: right;
+  background-color: #80e783;
+  border-radius: 51px;
+}
+
+.available {
+  opacity: 1;
+}
+
+.unavailable {
+  opacity: 0.3
+}
+
+.online-status {
+  height: 30px;
+  width: 30px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 23px;
+  background-size: contain;
+}
+.online {
+  background-image: url('https://files.gitter.im/eleanorreem/nFz1/online.png');
+}
+.busy {
+  background-image: url('https://files.gitter.im/eleanorreem/s1TH/busy.png');
+}
+.offline {
+  background-image: url('https://files.gitter.im/eleanorreem/aweO/offline.png');
+}
+
+.search-icon {
+  height: 30px;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+
+// utility classes
+
+.hidden-item {
+  display: none;
+}
+.bottomdiv {
+  height: 50px;
+}
 .schedule {
   float: left;
   margin-top: 20px;
