@@ -48,6 +48,7 @@ export default class MentorDashboard extends React.Component {
           </Col>
           <Col md={4}>
             <ProfileButtons
+              location={this.props.location.pathname}
               status={this.state.status}
               changeStatus={this.changeStatus}
               viewProfileLink={this.toggleModal.bind(this, 'showViewModal')}
@@ -79,6 +80,7 @@ export default class MentorDashboard extends React.Component {
             <Button onClick={this.toggleModal.bind(this, 'showEditModal')}>Close</Button>
           </Modal.Footer>
         </Modal>
+        <div className='bottomdiv'></div>
       </Grid>
     )
   }
